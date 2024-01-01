@@ -21,7 +21,7 @@ export default function Chat() {
 		api: '/api/chat/openrouter',
 	})
 	const params = useSearchParams()
-	const prompt = params.get('prompt')
+	const prompt = params.get('message')
 	const isFirstRun = useRef(true)
 	const [autoScroll, setAutoScroll] = useState(true)
 
