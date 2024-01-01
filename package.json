@@ -9,16 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@huggingface/inference": "^2.6.4",
+    "@pinecone-database/pinecone": "^1.1.2",
+    "@xenova/transformers": "^2.13.0",
+    "ai": "^2.2.30",
+    "langchain": "^0.0.213",
+    "next": "14.0.4",
+    "openai": "^4.24.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.4"
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@iconify-json/lucide": "^1.1.150",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@unocss/postcss": "^0.58.2",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "eslint-config-next": "14.0.4",
+    "typescript": "^5",
+    "unocss": "^0.58.2"
   }
 }
