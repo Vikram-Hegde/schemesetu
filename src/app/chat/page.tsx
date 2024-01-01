@@ -18,7 +18,7 @@ export default function Chat() {
 		append,
 		isLoading,
 	} = useChat({
-		api: '/api/chat/openrouter',
+		api: '/api/chat/',
 	})
 	const params = useSearchParams()
 	const prompt = params.get('message')
