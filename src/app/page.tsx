@@ -55,7 +55,7 @@ export default function Home() {
 				<button
 					type="button"
 					onClick={() => message && router.push(`/chat?message=${message}`)}
-					className="self-end mb-2 mr-2 bg-accent-300/50 p-2 rounded flex"
+					className="self-end mb-2 mr-2 bg-accent-300/50 @light:bg-accent-300/10 p-2 rounded flex"
 				>
 					<i className="i-lucide:send w-5 h-5" />
 				</button>

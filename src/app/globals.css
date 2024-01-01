@@ -159,13 +159,10 @@ header {
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--accent-900: 16 10% 90%;
-		--accent-800: 16 10% 88%;
-		--accent-700: 16 10% 85%;
-		--accent-600: 16 10% 82%;
-		--accent-500: 16 10% 80%;
-		--accent-400: 16 10% 70%;
-		--accent-300: 16 10% 55%;
+		--accent-900: 16 10% 95%;
+		--accent-700: 16 10% 90%;
+		--accent-500: 16 10% 87%;
+		--accent-300: 16 10% 20%;
 
 		--green: 150 100% 21%;
 		--orange: 16 88% 55%;

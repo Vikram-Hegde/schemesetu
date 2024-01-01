@@ -86,7 +86,7 @@ export default function Chat() {
 					<Logo className="text-center" />
 				</Link>
 				<button
-					className="bg-accent-300/50 p-2 rounded flex self-center"
+					className="bg-accent-300/50 @light:bg-accent-300/10 p-2 rounded flex self-center"
 					onClick={() => {
 						navigator.clipboard.writeText(
 							messages
@@ -146,7 +146,7 @@ export default function Chat() {
 				/>
 				<button
 					type="submit"
-					className="mr-1 bg-accent-300/50 p-2 rounded flex self-center"
+					className="mr-1 bg-accent-300/50 @light:bg-accent-300/10 p-2 rounded flex self-center"
 					disabled={isLoading}
 				>
 					{isLoading ? (
@@ -159,7 +159,7 @@ export default function Chat() {
 
 			{!autoScroll && (
 				<button
-					className="position-fixed md:right-4 md:bottom-4 bg-accent-300/50 p-2 rounded flex self-center"
+					className="position-fixed md:right-4 md:bottom-4 bg-accent-300/10 p-2 rounded flex self-center"
 					onClick={() => setAutoScroll(true)}
 				>
 					<i className="i-lucide:arrow-down w-4 h-4" />
