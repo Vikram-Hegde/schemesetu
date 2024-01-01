@@ -7,8 +7,6 @@ import { BytesOutputParser } from 'langchain/schema/output_parser'
 import { formatDocumentsAsString } from 'langchain/util/document'
 import { vectorRetriever } from '../retriever'
 
-export const runtime = 'edge';
-
 const formatMessage = (message: Message) => {
 	return `<|${message.role}|>: ${message.content}</s>`
 }
