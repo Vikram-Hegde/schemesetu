@@ -6,6 +6,8 @@ import OpenAI from 'openai'
 import { vectorRetriever } from '../retriever'
 import { log } from 'console'
 
+export const runtime = 'edge';
+
 const Hf = new HfInference(process.env.HUGGINGFACEHUB_API_KEY!)
 const openai = new OpenAI({
 	baseURL: 'https://openrouter.ai/api/v1',
