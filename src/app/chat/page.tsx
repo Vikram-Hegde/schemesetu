@@ -22,14 +22,14 @@ export default function Chat() {
 	})
 	const params = useSearchParams()
 	const prompt = params.get('message')
-	const isFirstRun = useRef(true)
+	// const isFirstRun = useRef(true)
 	const [autoScroll, setAutoScroll] = useState(true)
 
 	useEffect(() => {
-		if (isFirstRun.current) {
-			isFirstRun.current = false
-			return
-		}
+		// if (isFirstRun.current) {
+		// 	isFirstRun.current = false
+		// 	return
+		// }
 		if (prompt) {
 			append({ content: prompt, role: 'user' })
 		}
