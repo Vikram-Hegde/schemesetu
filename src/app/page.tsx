@@ -54,7 +54,7 @@ export default function Home() {
 				></textarea>
 				<button
 					type="button"
-					onClick={() => router.push(`/chat`, { query: { message } })}
+					onClick={() => router.push(`/chat?message=${message}`)}
 					className="self-end mb-2 mr-2 bg-accent-300/50 p-2 rounded flex"
 				>
 					<i className="i-lucide:send w-5 h-5" />
