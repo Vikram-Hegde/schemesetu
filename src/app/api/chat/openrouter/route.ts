@@ -4,7 +4,6 @@ import { PromptTemplate } from 'langchain/prompts'
 import { formatDocumentsAsString } from 'langchain/util/document'
 import OpenAI from 'openai'
 import { vectorRetriever } from '../retriever'
-import { log } from 'console'
 
 export const runtime = 'edge';
 
@@ -31,7 +30,7 @@ export async function POST(req: Request) {
 	})
 
 	if (determine.toLowerCase().includes('no')) {
-		log('basic answering')
+		console.log('basic answering')
 		const response = await openai.chat.completions.create({
 			model: 'huggingfaceh4/zephyr-7b-beta',
 			stream: true,
