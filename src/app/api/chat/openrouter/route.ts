@@ -4,6 +4,7 @@ import { PromptTemplate } from 'langchain/prompts'
 import { formatDocumentsAsString } from 'langchain/util/document'
 import OpenAI from 'openai'
 import { vectorRetriever } from '../retriever'
+import { log } from 'console'
 
 const Hf = new HfInference(process.env.HUGGINGFACEHUB_API_KEY!)
 const openai = new OpenAI({
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
 	})
 
 	if (determine.toLowerCase().includes('no')) {
-		console.log('basic answering')
+		log('basic answering')
 		const response = await openai.chat.completions.create({
 			model: 'huggingfaceh4/zephyr-7b-beta',
 			stream: true,

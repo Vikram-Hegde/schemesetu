@@ -8,6 +8,7 @@ import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export default function Chat() {
 	const {
@@ -21,7 +22,7 @@ export default function Chat() {
 		api: '/api/chat/',
 	})
 	const params = useSearchParams()
-	const prompt = params.get('message')
+	const prompt = params.get('prompt')
 	// const isFirstRun = useRef(true)
 	const [autoScroll, setAutoScroll] = useState(true)
 
@@ -79,6 +80,7 @@ export default function Chat() {
 			})
 	}, [messages, autoScroll])
 
+	const { data: session } = useSession()
 	return (
 		<section className="chat-messages | grid grid-rows-[auto_1fr_auto] min-h-screen">
 			<header className="position-sticky top-0 flex justify-between items-center py-5 p-inline-[max(1.5rem,50%-42rem/2)]">
@@ -86,7 +88,7 @@ export default function Chat() {
 					<Logo className="text-center" />
 				</Link>
 				<button
-					className="bg-accent-300/50 @light:bg-accent-300/10 p-2 rounded flex self-center"
+					className="bg-accent-300/50 p-2 rounded flex self-center"
 					onClick={() => {
 						navigator.clipboard.writeText(
 							messages
@@ -110,9 +112,13 @@ export default function Chat() {
 						}`}
 					>
 						<Image
-							src={`/${m.role}.png`}
+							src={
+								m.role === 'user'
+									? session?.user?.image || '/user.png'
+									: '/assistant.png'
+							}
 							alt={`message from ${m.role}`}
-							className={`mt-auto ${m.role === 'user' ? 'order-2' : ''}`}
+							className={`mt-auto rounded-full ${m.role === 'user' ? 'order-2' : ''}`}
 							height={32}
 							width={32}
 						/>
@@ -146,7 +152,7 @@ export default function Chat() {
 				/>
 				<button
 					type="submit"
-					className="mr-1 bg-accent-300/50 @light:bg-accent-300/10 p-2 rounded flex self-center"
+					className="mr-1 bg-accent-300/50 p-2 rounded flex self-center"
 					disabled={isLoading}
 				>
 					{isLoading ? (
@@ -159,7 +165,7 @@ export default function Chat() {
 
 			{!autoScroll && (
 				<button
-					className="position-fixed md:right-4 md:bottom-4 bg-accent-300/10 p-2 rounded flex self-center"
+					className="position-fixed md:right-4 md:bottom-4 bg-accent-300/50 p-2 rounded flex self-center"
 					onClick={() => setAutoScroll(true)}
 				>
 					<i className="i-lucide:arrow-down w-4 h-4" />

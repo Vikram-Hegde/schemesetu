@@ -93,7 +93,14 @@ select {
 body {
 	/* font-family: 'Titillium Web', sans-serif; */
 	color: hsl(16 88% 95%);
-	background-color: hsl(var(--accent-900));
+	background-color: hsl(var(--accent-900)); /* Background color */
+	background-image: radial-gradient(
+		circle at 2px 2px,
+		hsl(var(--accent-700) / 0.35) 1px,
+		transparent 2px
+	); 
+	background-size: 10px 10px; /* Adjust size of the pattern */
+
 	overflow-x: hidden;
 }
 
@@ -159,10 +166,13 @@ header {
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--accent-900: 16 10% 95%;
-		--accent-700: 16 10% 90%;
-		--accent-500: 16 10% 87%;
-		--accent-300: 16 10% 20%;
+		--accent-900: 16 10% 90%;
+		--accent-800: 16 10% 88%;
+		--accent-700: 16 10% 85%;
+		--accent-600: 16 10% 82%;
+		--accent-500: 16 10% 80%;
+		--accent-400: 16 10% 70%;
+		--accent-300: 16 10% 55%;
 
 		--green: 150 100% 21%;
 		--orange: 16 88% 55%;
