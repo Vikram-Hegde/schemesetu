@@ -7,6 +7,8 @@ import { experimental_buildStarChatBetaPrompt } from 'ai/prompts'
 
 const Hf = new HfInference(process.env.HUGGINGFACEHUB_API_KEY!)
 
+export const runtime  = 'edge'
+
 const questionPrompt = PromptTemplate.fromTemplate(
 	`
 <|system|>
