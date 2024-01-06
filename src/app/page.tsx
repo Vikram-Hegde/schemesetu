@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import Logo from '@/components/Logo'
+import Nav from '@/components/Nav'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
-import Nav from '@/components/Nav'
+import { useState } from 'react'
 
 const suggestions = [
 	'Tell me about recent RBI schemes',
@@ -33,7 +33,7 @@ export default function Home() {
 		navigate()
 	}
 	const handleTextareaKeyDown = (
-		event: React.KeyboardEvent<HTMLTextAreaElement>
+		event: React.KeyboardEvent<HTMLTextAreaElement>,
 	) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			if (!session) {

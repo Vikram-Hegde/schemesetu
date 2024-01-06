@@ -98,7 +98,7 @@ body {
 		circle at 2px 2px,
 		hsl(var(--accent-700) / 0.35) 1px,
 		transparent 2px
-	); 
+	);
 	background-size: 10px 10px; /* Adjust size of the pattern */
 
 	overflow-x: hidden;

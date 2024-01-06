@@ -28,7 +28,7 @@ CHAT HISTORY: {chat_history}
 <|user|>
 {question}</s>
 <|assistant|>
-`
+`,
 )
 
 const basicAnswerPrompt = PromptTemplate.fromTemplate(`
@@ -78,7 +78,7 @@ const chainWithContext = questionPrompt.pipe(model).pipe(outputParser)
 
 const performQuestionAnswering = async (
 	question: string,
-	chatHistory: string
+	chatHistory: string,
 ) => {
 	const { text } = await determine_chain.invoke({
 		sentence: question,

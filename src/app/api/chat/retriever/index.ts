@@ -9,7 +9,7 @@ export async function vectorRetriever() {
 		new HuggingFaceTransformersEmbeddings({
 			modelName: 'Xenova/all-MiniLM-L6-v2',
 		}),
-		{ pineconeIndex }
+		{ pineconeIndex },
 	)
 	const retriever = vectorStore.asRetriever()
 	return retriever

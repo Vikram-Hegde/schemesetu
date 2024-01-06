@@ -1,14 +1,14 @@
 'use client'
 
-import { useChat } from 'ai/react'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
 import Logo from '@/components/Logo'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { useChat } from 'ai/react'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export default function Chat() {
 	const {
@@ -93,7 +93,7 @@ export default function Chat() {
 						navigator.clipboard.writeText(
 							messages
 								.map((m) => `${m.role.toUpperCase()}: ${m.content}`)
-								.join('\n\n')
+								.join('\n\n'),
 						)
 					}}
 				>
@@ -118,7 +118,9 @@ export default function Chat() {
 									: '/assistant.png'
 							}
 							alt={`message from ${m.role}`}
-							className={`mt-auto rounded-full ${m.role === 'user' ? 'order-2' : ''}`}
+							className={`mt-auto rounded-full ${
+								m.role === 'user' ? 'order-2' : ''
+							}`}
 							height={32}
 							width={32}
 						/>
@@ -138,7 +140,7 @@ export default function Chat() {
 						? handleSubmit
 						: (e) => {
 								e.preventDefault()
-						  }
+							}
 				}
 				className="position-sticky bottom-2 flex bg-accent-700 rounded w-[min(100%-2rem,42rem)] justify-self-center border border-accent-500 border-solid my-4"
 			>

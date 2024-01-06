@@ -1,9 +1,9 @@
 import { HfInference } from '@huggingface/inference'
 import { HuggingFaceStream, Message, StreamingTextResponse } from 'ai'
+import { experimental_buildStarChatBetaPrompt } from 'ai/prompts'
 import { PromptTemplate } from 'langchain/prompts'
 import { formatDocumentsAsString } from 'langchain/util/document'
 import { vectorRetriever } from './retriever'
-import { experimental_buildStarChatBetaPrompt } from 'ai/prompts'
 
 const Hf = new HfInference(process.env.HUGGINGFACEHUB_API_KEY!)
 
@@ -22,7 +22,7 @@ CHAT HISTORY:
 <|user|>
 {question}</s>
 <|assistant|>
-`
+`,
 )
 
 const basicAnswerPrompt = PromptTemplate.fromTemplate(`
@@ -47,7 +47,7 @@ Your Answer:
 
 const performQuestionAnswering = async (
 	question: string,
-	chatHistory: Message[]
+	chatHistory: Message[],
 ) => {
 	const { generated_text: determine } = await Hf.textGeneration({
 		model: 'google/flan-t5-xxl',
