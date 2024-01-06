@@ -74,7 +74,7 @@ export default function Home() {
 							if (!session) {
 								return router.push('/register')
 							}
-							router.push(`/chat?prompt=${message}`)
+							if (message) router.push(`/chat?prompt=${message}`)
 						}}
 						className="self-end mb-2 mr-2 bg-accent-300/50 p-2 rounded flex"
 					>

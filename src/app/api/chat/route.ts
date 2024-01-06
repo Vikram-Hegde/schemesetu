@@ -5,8 +5,6 @@ import { formatDocumentsAsString } from 'langchain/util/document'
 import { vectorRetriever } from './retriever'
 import { experimental_buildStarChatBetaPrompt } from 'ai/prompts'
 
-export const runtime = 'edge'
-
 const Hf = new HfInference(process.env.HUGGINGFACEHUB_API_KEY!)
 
 const questionPrompt = PromptTemplate.fromTemplate(
