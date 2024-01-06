@@ -21,6 +21,7 @@ export default function Home() {
 		if (!session) {
 			return router.push('/register')
 		}
+		console.log(session)
 		router.push(`/chat?prompt=${altMessage ?? message}`)
 	}
 	const handleSubmit = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
