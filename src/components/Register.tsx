@@ -31,8 +31,22 @@ const Register = () => {
 				'Content-Type': 'application/json',
 			},
 		})
+		const result = await response.json()
+		if (result?.message === 'success') {
+			signIn('credentials', {
+				email,
+				password,
+				callbackUrl: '/',
+			})
+		} else {
+			alert(result?.message)
+		}
+	}
 
-		console.log({ response })
+	const toggleMode = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+		e.preventDefault()
+		const form = e.currentTarget.closest('form')!
+		form.reset()
 	}
 	return (
 		<section className="h-screen grid place-content-center text-center">
@@ -105,7 +119,10 @@ const Register = () => {
 								<p className="text-sm mt-2 gap-1 flex justify-center underline">
 									Don&apos;t have an account?
 									<span
-										onClick={() => setIsLogin(false)}
+										onClick={(e) => {
+											toggleMode(e)
+											setIsLogin(false)
+										}}
 										className="hover:opacity-[0.7] cursor-pointer transition"
 									>
 										Sign up
@@ -166,7 +183,10 @@ const Register = () => {
 								<p className="text-sm mt-2 gap-1 flex justify-center underline">
 									Already have an account?
 									<span
-										onClick={() => setIsLogin(true)}
+										onClick={(e) => {
+											toggleMode(e)
+											setIsLogin(true)
+										}}
 										className="hover:opacity-[0.7] cursor-pointer transition"
 									>
 										Sign in
