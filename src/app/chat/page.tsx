@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -23,14 +23,14 @@ export default function Chat() {
 	})
 	const params = useSearchParams()
 	const prompt = params.get('prompt')
-	// const isFirstRun = useRef(true)
+	const isFirstRun = useRef(true)
 	const [autoScroll, setAutoScroll] = useState(true)
 
 	useEffect(() => {
-		// if (isFirstRun.current) {
-		// 	isFirstRun.current = false
-		// 	return
-		// }
+		if (isFirstRun.current) {
+			isFirstRun.current = false
+			return
+		}
 		if (prompt) {
 			append({ content: prompt, role: 'user' })
 		}

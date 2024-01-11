@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import toast from 'react-hot-toast'
 const Nav = () => {
 	const router = useRouter()
 	const { data: session } = useSession()
@@ -36,7 +37,10 @@ const Nav = () => {
 								aria-labelledby="options-menu"
 							>
 								<button
-									onClick={() => signOut()}
+									onClick={() => {
+										signOut()
+										toast.success('Signed out successfully')
+									}}
 									className="block px-4 py-2 text-sm text-gray-100"
 									role="menuitem"
 								>

@@ -3,19 +3,34 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Logo from './Logo'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 const Register = () => {
 	const [isLogin, setIsLogin] = useState(false)
+	const router = useRouter()
 	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const formData = new FormData(e.currentTarget)
-		const email = formData.get('login_email')
-		const password = formData.get('login_password')
+		try {
+			e.preventDefault()
+			const formData = new FormData(e.currentTarget)
+			const email = formData.get('login_email')
+			const password = formData.get('login_password')
 
-		signIn('credentials', {
-			email,
-			password,
-			callbackUrl: '/',
-		})
+			signIn('credentials', {
+				email,
+				password,
+				callbackUrl: '/',
+				redirect: false,
+			}).then(async (res) => {
+				if (res?.ok) {
+					toast.success('Signed in successfully.')
+					router.push('/')
+				} else {
+					toast.error('Invalid credentials.')
+				}
+			})
+		} catch (err) {
+			toast.error('Invalid credentials.')
+		}
 	}
 	const handleSigninSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -31,8 +46,30 @@ const Register = () => {
 				'Content-Type': 'application/json',
 			},
 		})
+		const result = await response.json()
+		if (result?.message === 'success') {
+			signIn('credentials', {
+				email,
+				password,
+				callbackUrl: '/',
+				redirect: false,
+			}).then((res) => {
+				if (res?.ok) {
+					toast.success('Signed in successfully.')
+					router.push('/')
+				} else {
+					toast.error('Invalid credentials.')
+				}
+			})
+		} else {
+			toast.error('This email is already registered.')
+		}
+	}
 
-		console.log({ response })
+	const toggleMode = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+		e.preventDefault()
+		const form = e.currentTarget.closest('form')!
+		form.reset()
 	}
 	return (
 		<section className="h-screen grid place-content-center text-center">
@@ -105,7 +142,10 @@ const Register = () => {
 								<p className="text-sm mt-2 gap-1 flex justify-center underline">
 									Don&apos;t have an account?
 									<span
-										onClick={() => setIsLogin(false)}
+										onClick={(e) => {
+											toggleMode(e)
+											setIsLogin(false)
+										}}
 										className="hover:opacity-[0.7] cursor-pointer transition"
 									>
 										Sign up
@@ -166,7 +206,10 @@ const Register = () => {
 								<p className="text-sm mt-2 gap-1 flex justify-center underline">
 									Already have an account?
 									<span
-										onClick={() => setIsLogin(true)}
+										onClick={(e) => {
+											toggleMode(e)
+											setIsLogin(true)
+										}}
 										className="hover:opacity-[0.7] cursor-pointer transition"
 									>
 										Sign in
