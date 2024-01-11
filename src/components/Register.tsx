@@ -3,19 +3,34 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Logo from './Logo'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 const Register = () => {
 	const [isLogin, setIsLogin] = useState(false)
+	const router = useRouter()
 	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const formData = new FormData(e.currentTarget)
-		const email = formData.get('login_email')
-		const password = formData.get('login_password')
+		try {
+			e.preventDefault()
+			const formData = new FormData(e.currentTarget)
+			const email = formData.get('login_email')
+			const password = formData.get('login_password')
 
-		signIn('credentials', {
-			email,
-			password,
-			callbackUrl: '/',
-		})
+			signIn('credentials', {
+				email,
+				password,
+				callbackUrl: '/',
+				redirect: false,
+			}).then(async (res) => {
+				if (res?.ok) {
+					toast.success('Signed in successfully.')
+					router.push('/')
+				} else {
+					toast.error('Invalid credentials.')
+				}
+			})
+		} catch (err) {
+			toast.error('Invalid credentials.')
+		}
 	}
 	const handleSigninSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -37,9 +52,17 @@ const Register = () => {
 				email,
 				password,
 				callbackUrl: '/',
+				redirect: false,
+			}).then((res) => {
+				if (res?.ok) {
+					toast.success('Signed in successfully.')
+					router.push('/')
+				} else {
+					toast.error('Invalid credentials.')
+				}
 			})
 		} else {
-			alert(result?.message)
+			toast.error('This email is already registered.')
 		}
 	}
 
