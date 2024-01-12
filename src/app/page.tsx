@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const suggestions = [
-	'Tell me about recent RBI schemes',
+	'Tell a few RBI schemes',
 	'List some useful schemes for women in india',
 	'What is gokul mission?',
 ]
