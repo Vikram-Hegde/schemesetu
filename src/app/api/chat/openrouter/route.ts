@@ -14,7 +14,7 @@ const openai = new OpenAI({
 
 const determine_prompt = PromptTemplate.fromTemplate(`
 Answer the following yes/no question, is the following sentence a question about government schemes
-Sentence: {sentence}
+Question: {sentence}?
 Your Answer: 
 `)
 
