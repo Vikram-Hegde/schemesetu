@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import Logo from '@/components/Logo'
-import { useChat } from 'ai/react'
-import { useSession } from 'next-auth/react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import Logo from '@/components/Logo';
+import { useChat } from 'ai/react';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function Chat() {
 	const {
@@ -19,12 +19,12 @@ export default function Chat() {
 		append,
 		isLoading,
 	} = useChat({
-		api: '/api/chat/openrouter',
-	})
-	const params = useSearchParams()
-	const prompt = params.get('prompt')
+		api: '/api/chat/cloudflare',
+	});
+	const params = useSearchParams();
+	const prompt = params.get('prompt');
 	// const isFirstRun = useRef(true)
-	const [autoScroll, setAutoScroll] = useState(true)
+	const [autoScroll, setAutoScroll] = useState(true);
 
 	useEffect(() => {
 		// if (isFirstRun.current) {
@@ -32,13 +32,13 @@ export default function Chat() {
 		// 	return
 		// }
 		if (prompt) {
-			append({ content: prompt, role: 'user' })
+			append({ content: prompt, role: 'user' });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, []);
 
 	useEffect(() => {
-		const chatWindow = document.querySelector('html') as HTMLElement
+		const chatWindow = document.querySelector('html') as HTMLElement;
 		const scrollHandler = () => {
 			if (
 				chatWindow.scrollHeight -
@@ -46,41 +46,41 @@ export default function Chat() {
 					chatWindow.clientHeight <
 				80
 			) {
-				setAutoScroll(true)
+				setAutoScroll(true);
 			} else {
-				setAutoScroll(false)
+				setAutoScroll(false);
 			}
-		}
-		window.addEventListener('scroll', scrollHandler)
+		};
+		window.addEventListener('scroll', scrollHandler);
 
 		const handleKeyboardShortcut = (event: KeyboardEvent) => {
 			switch (event.key) {
 				case '/':
-					event.preventDefault()
-					const input = document.querySelector('input') as HTMLInputElement
-					input.focus()
-					break
+					event.preventDefault();
+					const input = document.querySelector('input') as HTMLInputElement;
+					input.focus();
+					break;
 				default:
-					break
+					break;
 			}
-		}
-		window.addEventListener('keydown', handleKeyboardShortcut)
+		};
+		window.addEventListener('keydown', handleKeyboardShortcut);
 		return () => {
-			window.removeEventListener('scroll', scrollHandler)
-			window.removeEventListener('keydown', handleKeyboardShortcut)
-		}
-	}, [])
+			window.removeEventListener('scroll', scrollHandler);
+			window.removeEventListener('keydown', handleKeyboardShortcut);
+		};
+	}, []);
 
 	useEffect(() => {
-		const chatWindow = document.querySelector('html') as HTMLElement
+		const chatWindow = document.querySelector('html') as HTMLElement;
 		if (autoScroll)
 			chatWindow.scrollTo({
 				top: chatWindow.scrollHeight,
 				// behavior: 'smooth',
-			})
-	}, [messages, autoScroll])
+			});
+	}, [messages, autoScroll]);
 
-	const { data: session } = useSession()
+	const { data: session } = useSession();
 	return (
 		<section className="chat-messages | grid grid-rows-[auto_1fr_auto] min-h-screen">
 			<header className="position-sticky top-0 flex justify-between items-center py-5 p-inline-[max(1.5rem,50%-42rem/2)]">
@@ -93,8 +93,8 @@ export default function Chat() {
 						navigator.clipboard.writeText(
 							messages
 								.map((m) => `${m.role.toUpperCase()}: ${m.content}`)
-								.join('\n\n'),
-						)
+								.join('\n\n')
+						);
 					}}
 				>
 					<i className="i-lucide:clipboard w-4 h-4" />
@@ -139,8 +139,8 @@ export default function Chat() {
 					!isLoading
 						? handleSubmit
 						: (e) => {
-								e.preventDefault()
-							}
+								e.preventDefault();
+						  }
 				}
 				className="position-sticky bottom-2 flex bg-accent-700 rounded w-[min(100%-2rem,42rem)] justify-self-center border border-accent-500 border-solid my-4"
 			>
@@ -174,5 +174,5 @@ export default function Chat() {
 				</button>
 			)}
 		</section>
-	)
+	);
 }
