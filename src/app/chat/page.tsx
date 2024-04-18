@@ -19,7 +19,7 @@ export default function Chat() {
 		append,
 		isLoading,
 	} = useChat({
-		api: '/api/chat/cloudflare',
+		api: '/api/chat/',
 	});
 	const params = useSearchParams();
 	const prompt = params.get('prompt');
